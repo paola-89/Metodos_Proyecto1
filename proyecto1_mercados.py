@@ -313,11 +313,10 @@ for i, series in enumerate(alfas):
         print('\n Medida de Riesgo: ', df.columns[0])
 
         # Cambiamos el índice de los rolling para poder concatenar después
-        #df.index = pd.to_datetime(df['Fecha'])
         df2 = pd.concat([df, rendimientos_back], axis=1)
 
         # Crea un nuevo DF solamente con las excedencias al VaR
-        comparison = df2[ df2[df2.columns[2]] < df2[df2.columns[1]] ]
+        comparison = df2[ df2[df2.columns[1]] < df2[df2.columns[0]] ]
         # Cuenta cuántas excedencias hay
         excede = comparison.shape[0]
         excede_prop = 100 * excede / df.shape[0]

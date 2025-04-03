@@ -196,7 +196,7 @@ st.pyplot(fig6)
 #inciso e) ------------------------------------------------------------------------
 
 st.subheader("Eficiencia de estimaciones")
-st.dataframe(CR.df_final.style.background_gradient(cmap='Blues'))
+st.dataframe(CR.df_final.style.background_gradient(cmap='Blues'),hide_index = True)
 
 #inciso f) ------------------------------------------------------------------------------------------
 
