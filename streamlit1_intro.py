@@ -73,7 +73,7 @@ tabla1= pd.DataFrame(
     }
 )
 
-st.dataframe(tabla1)
+st.dataframe(tabla1,hide_index = True)
 
 st.subheader("ES a 95%, 97.5% y 99%")
 
@@ -87,7 +87,7 @@ tabla2= pd.DataFrame(
     }
 )
 
-st.dataframe(tabla2)
+st.dataframe(tabla2,hide_index = True)
 
 #Histograma donde se muestra VaR y ES-----------------------------------------------------------------
 st.subheader("Histogramas de las Medidas de Riesgo")
@@ -193,5 +193,14 @@ plt.legend()
 #plt.show()
 st.pyplot(fig6)
 
+#inciso e) ------------------------------------------------------------------------
+
 st.subheader("Eficiencia de estimaciones")
 st.dataframe(CR.df_final.style.background_gradient(cmap='Blues'))
+
+#inciso f) ------------------------------------------------------------------------------------------
+
+CR.tabla_violaciones
+
+st.dataframe(CR.tabla_violaciones.style.background_gradient(cmap="coolwarm"))
+st.dataframe(CR.tabla_violaciones.style.applymap(MCF.highlight_high_values))

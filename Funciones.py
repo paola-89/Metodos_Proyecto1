@@ -46,3 +46,9 @@ def calcular_rendimientos_Log(df): #Función de rendimientos logarítmicos
     rendimientos = np.log(df.iloc[:,0]) - np.log(df.iloc[:,0].shift(1))
 
     return rendimientos.dropna()
+
+def highlight_high_values(val):
+    """Si el valor es mayor a 2.5%, lo resalta en amarillo."""
+    color = "lightred" if val > 2.5 else "white"
+    return f"background-color: {color}"
+
