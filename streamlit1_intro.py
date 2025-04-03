@@ -41,7 +41,7 @@ col2.metric("Kurtosis",f"{kurtosis:.4}")
 col3.metric("Sesgo",f"{skew:.3}")
 
 
-st.subheader(f'Gráfico de Rendimientos : {ticker}')
+st.subheader(f'Gráfico de Rendimientos Logarítmicos: {ticker}')
 
 fig,ax = plt.subplots(figsize = (10,5))
 ax.plot(df_rendimientos.index,df_rendimientos)
@@ -51,9 +51,9 @@ ax.set_ylabel("Rendimiento Diario")
 st.pyplot(fig)
 
  # Histograma 
-st.subheader(f'Histograma de Rendimientos : {ticker}')
+st.subheader(f'Histograma de LogRendimientos : {ticker}')
 fig2,ax = plt.subplots(figsize =(10,5))
-ax.hist(df_rendimientos,bins=50,alpha=0.5,color = 'green')
+ax.hist(df_rendimientos,bins=50,alpha=0.5,color = 'blue')
 ax.set_title('Histograma')
 ax.set_xlabel('Rendimiento Diario')
 ax.set_ylabel('Frecuencia')
@@ -92,7 +92,7 @@ st.dataframe(tabla2,hide_index = True)
 #Histograma donde se muestra VaR y ES-----------------------------------------------------------------
 st.subheader("Histogramas de las Medidas de Riesgo")
 
-st.text("Se marcarán los rendimientos que superen al VaR histórico")
+st.text("Se marcarán los rendimientos que superen al VaR histórico con color rojo")
 
 fig3,ax = plt.subplots(figsize =(10,5))
 n, bins, patches = plt.hist(df_rendimientos, bins=50, color='blue', alpha=0.7, label='Returns')
@@ -103,13 +103,13 @@ for bin_left, bin_right, patch in zip(bins, bins[1:], patches):
     if bin_left < CR.hVaR_95:
         patch.set_facecolor('red')
 
-# Mark the different VaR and CVaR values on the histogram
+# Graficamos las diferentes medidas
 plt.axvline(x=CR.VaR_95_t, color='skyblue', linestyle='--', label='VaR 95% (Paramétrico t)')
 plt.axvline(x=CR.MCVaR_95, color='grey', linestyle='--', label='VaR 95% (Monte Carlo)')
 plt.axvline(x=CR.hVaR_95, color='green', linestyle='--', label='VaR 95% (Histórico)')
 plt.axvline(x=CR.ES_95_t, color='purple', linestyle='-.', label='ES (Paramétrico t) 95%')
 
-# Add a legend and labels to make the chart more informative
+#Agregamos leyenda
 plt.title('Histograma de Rendimientos con VaR y ES a 95%')
 plt.xlabel('Rendimientos')
 plt.ylabel('Frecuencia')
@@ -123,12 +123,11 @@ fig4,ax = plt.subplots(figsize =(10,5))
 n, bins, patches = plt.hist(df_rendimientos, bins=50, color='blue', alpha=0.7, label='Returns')
 
 
-# Identify bins to the left of hVaR_99 and color them differently
 for bin_left, bin_right, patch in zip(bins, bins[1:], patches):
     if bin_left < CR.hVaR_975:
         patch.set_facecolor('red')
 
-# Mark the different VaR and CVaR values on the histogram
+# Graficamos las medidas
 plt.axvline(x=CR.VaR_975_t, color='skyblue', linestyle='--', label='VaR 97.5% (Paramétrico t)')
 plt.axvline(x=CR.MCVaR_975, color='grey', linestyle='--', label='VaR 97.5% (Monte Carlo)')
 plt.axvline(x=CR.hVaR_975, color='green', linestyle='--', label='VaR 97.5% (Histórico)')
@@ -140,20 +139,17 @@ plt.xlabel('Rendimientos')
 plt.ylabel('Frecuencia')
 plt.legend()
 
-# Display the chart
 st.pyplot(fig4)
 
 
 fig5,ax = plt.subplots(figsize =(10,5))
 n, bins, patches = plt.hist(df_rendimientos, bins=50, color='blue', alpha=0.7, label='Returns')
 
-
-# Identify bins to the left of hVaR_99 and color them differently
 for bin_left, bin_right, patch in zip(bins, bins[1:], patches):
     if bin_left < CR.hVaR_99:
         patch.set_facecolor('red')
 
-# Mark the different VaR and CVaR values on the histogram
+#Graficamos los datos
 plt.axvline(x=CR.VaR_99_t, color='skyblue', linestyle='--', label='VaR 99% (Paramétrico t)')
 plt.axvline(x=CR.MCVaR_99, color='grey', linestyle='--', label='VaR 99% (Monte Carlo)')
 plt.axvline(x=CR.hVaR_99, color='green', linestyle='--', label='VaR 99% (Histórico)')
@@ -165,14 +161,18 @@ plt.xlabel('Rendimientos')
 plt.ylabel('Frecuencia')
 plt.legend()
 
-# Display the chart
 st.pyplot(fig5)
 
 #d)) Rolling windows VaR------------------------------------------------------------------------------
 
+st.header("VaR y ES con Rolling Windows")
+st.subheader("VaR histórico y paramétrico")
+
+#poner eleccion 
+
 # Graficamos rendimientos
 fig6,ax = plt.subplots(figsize = (10,5))
-ax.plot(df_rendimientos.index,df_rendimientos * 100, label='Daily Returns (%)', color='blue', alpha=0.5)
+ax.plot(df_rendimientos.index,df_rendimientos * 100, label='Rendimientos diarios (%)', color='blue', alpha=0.5)
 ax.axhline(y = 0,linestyle = '-',alpha = 0.7)
 ax.set_xlabel("Fecha")
 ax.set_ylabel("Rendimiento Diario")
@@ -181,7 +181,7 @@ ax.set_ylabel("Rendimiento Diario")
 plt.plot(df_rendimientos.index,CR.VaR_95_rolling_df['95% VaR Rolling'], label='95% Rolling VaR', color='red')
 
 # Add a title and axis labels
-plt.title('Daily Returns and 95% Rolling VaR')
+plt.title('Rendimientos diarios y and 95% Rolling VaR')
 plt.xlabel('Date')
 plt.ylabel('Values (%)')
 
@@ -196,7 +196,7 @@ st.pyplot(fig6)
 #inciso e) ------------------------------------------------------------------------
 
 st.subheader("Eficiencia de estimaciones")
-st.dataframe(CR.df_final.style.background_gradient(cmap='Blues',subset=['Proporción 95%','Proporción 99%']),hide_index = True)
+st.dataframe(CR.df_final.style.background_gradient(cmap='Reds',subset=['Proporción 95%','Proporción 99%']),hide_index = True)
 
 #inciso f) ------------------------------------------------------------------------------------------
 st.subheader("Eficiencia de aproxzimación")
