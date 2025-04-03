@@ -61,7 +61,7 @@ st.pyplot(fig2)
 
 #VaR y ES inciso c)
 st.header(f"Medidas de Riesgo de {ticker} ")
-st.subheader("VaR a 95%, 99% y 99%")
+st.subheader("VaR a 95%, 975% y 99%")
 
 tabla1= pd.DataFrame(
     {
