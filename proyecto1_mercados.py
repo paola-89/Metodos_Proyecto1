@@ -189,3 +189,48 @@ hES_99_r_df = pd.DataFrame({'Fecha': df_rendimientos_log.index, '99% hES Rolling
 
 print(hES_95_r_df.tail())
 ### print(hVaR_99_r_df.tail()) ###
+
+#e) Eficiencia de estimaciones-----------------------------------------------------------------------------
+
+# Desplazar los rendimientos del stock al día siguiente (t+1)
+rendimientos_back = df_rendimientos_log.shift(-1)*100
+
+
+series_95 = [VaR_95_rolling_df, hVaR_95_r_df, ES_95_roll_df, hES_95_r_df]
+series_99 = [VaR_99_rolling_df, hVaR_99_r_df, ES_99_roll_df, hES_99_r_df]
+alfas = [series_95, series_99]
+
+
+# Crear una lista para almacenar los resultados y las medidas
+tabla_resultados = []
+
+# Procesar las series de alfas
+for i, series in enumerate(alfas):
+    for j, df in enumerate(series):
+        print('\n Medida de Riesgo: ', df.columns[1])
+
+        # Cambiamos el índice de los rolling para poder concatenar después
+        df.index = pd.to_datetime(df['Fecha'])
+        df2 = pd.concat([df, rendimientos_back], axis=1)
+
+        # Crea un nuevo DF solamente con las excedencias al VaR
+        comparison = df2[ df2[df2.columns[2]] < df2[df2.columns[1]] ]
+        # Cuenta cuántas excedencias hay
+        excede = comparison.shape[0]
+        excede_prop = 100 * excede / df.shape[0]
+
+        print('Número de Excedencias: ', excede)
+        print('Proporción de Excedencias (%): ', round(excede_prop, 4))
+
+        # Agregar los resultados a la lista
+        medida = df.columns[1]
+        if i == 0:  # Para 95%
+            tabla_resultados.append([medida, excede, round(excede_prop, 4), None, None])
+        else:  # Para 99%
+            tabla_resultados[-len(series) + j][3] = excede
+            tabla_resultados[-len(series) + j][4] = round(excede_prop, 4)
+
+# Crear el DataFrame directamente desde la lista de resultados
+df_final = pd.DataFrame(tabla_resultados, columns=['Medida de Riesgo', 'Excedencias 95%', 'Proporción 95%', 'Excedencias 99%', 'Proporción 99%'])
+
+df_final

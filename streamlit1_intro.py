@@ -61,7 +61,7 @@ st.pyplot(fig2)
 
 #VaR y ES inciso c)
 st.header(f"Medidas de Riesgo de {ticker} ")
-st.subheader("VaR a 95%, 975% y 99%")
+st.subheader("VaR a 95%, 97.5% y 99%")
 
 tabla1= pd.DataFrame(
     {
@@ -75,7 +75,7 @@ tabla1= pd.DataFrame(
 
 st.dataframe(tabla1)
 
-st.subheader("ES a 95%, 99% y 99%")
+st.subheader("ES a 95%, 97.5% y 99%")
 
 tabla2= pd.DataFrame(
     {
@@ -192,3 +192,6 @@ plt.legend()
 #plt.tight_layout()
 #plt.show()
 st.pyplot(fig6)
+
+st.subheader("Eficiencia de estimaciones")
+st.dataframe(CR.df_final)
