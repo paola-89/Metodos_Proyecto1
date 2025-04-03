@@ -196,7 +196,7 @@ st.pyplot(fig6)
 #inciso e) ------------------------------------------------------------------------
 
 st.subheader("Eficiencia de estimaciones")
-st.dataframe(CR.df_final.style.background_gradient(cmap='Blues',subset=['Porcentaje Violaciones (%)']),hide_index = True)
+st.dataframe(CR.df_final.style.background_gradient(cmap='Blues',subset=['Proporción 95%','Proporción 99%']),hide_index = True)
 
 #inciso f) ------------------------------------------------------------------------------------------
 st.subheader("Eficiencia de aproxzimación")
