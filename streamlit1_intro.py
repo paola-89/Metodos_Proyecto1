@@ -196,11 +196,10 @@ st.pyplot(fig6)
 #inciso e) ------------------------------------------------------------------------
 
 st.subheader("Eficiencia de estimaciones")
-st.dataframe(CR.df_final.style.background_gradient(cmap='Blues'),hide_index = True)
+st.dataframe(CR.df_final.style.background_gradient(cmap='Blues',subset=['Porcentaje Violaciones (%)']),hide_index = True)
 
 #inciso f) ------------------------------------------------------------------------------------------
 
 CR.tabla_violaciones
 
-st.dataframe(CR.tabla_violaciones.style.background_gradient(cmap="Blues",subset=['Porcentaje Violaciones (%)']),hide_index = True)
 st.dataframe(CR.tabla_violaciones.style.applymap(MCF.highlight_high_values, subset=['Porcentaje Violaciones (%)']),hide_index = True)
