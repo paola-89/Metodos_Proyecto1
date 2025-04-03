@@ -169,13 +169,17 @@ st.header("VaR y ES con Rolling Windows")
 st.subheader("VaR histórico y paramétrico")
 
 #poner eleccion 
-intervalos = ["95%","97.5%","99%"]
+intervalos = ["95%","99%"]
 VAR_seleccionado = st.selectbox('Selecciona (%) de confianza ',intervalos)
 
 if VAR_seleccionado:
 
     columna1 = f'{VAR_seleccionado} VaR Rolling'
     columna2 = f'ES Rolling {VAR_seleccionado}'
+    dfc_name = f"{VAR_seleccionado}_rolling_df"  # "VaR_95_rolling_df"
+
+    # Obtener el DataFrame dinámicamente
+    dfc = getattr(CR, dfc_name)
 
     # Graficamos rendimientos
     fig6,ax = plt.subplots(figsize = (10,5))
@@ -184,25 +188,25 @@ if VAR_seleccionado:
     ax.set_xlabel("Fecha")
     ax.set_ylabel("Rendimiento Diario")
 
-# Graficamos los Rolling VaR
-plt.plot(df_rendimientos.index,CR.VaR_95_rolling_df[columna1], label=columna1, color='red')
-#plt.plot(df_rendimientos.index,CR.VaR_99_rolling_df[columna], label= columna, color='purple')
-plt.plot(df_rendimientos.index, CR.ES_95_rolling_df[columna2], label=columna2, color='purple')
-#plt.plot(df_rendimientos.index, CR.hES_95_rolling_df['hES Rolling 95%'], label='hES Rolling 95%', color='black')
+    # Graficamos los Rolling VaR
+    plt.plot(df_rendimientos.index,dfc[columna1], label=columna1, color='red')
+    #plt.plot(df_rendimientos.index,CR.VaR_99_rolling_df[columna], label= columna, color='purple')
+    plt.plot(df_rendimientos.index, dfc[columna2], label=columna2, color='purple')
+    #plt.plot(df_rendimientos.index, CR.hES_95_rolling_df['hES Rolling 95%'], label='hES Rolling 95%', color='black')
 
 
-# Add a title and axis labels
-plt.title('Rendimientos diarios y and 95% Rolling VaR')
-plt.xlabel('Date')
-plt.ylabel('Values (%)')
+    # Add a title and axis labels
+    plt.title('Rendimientos diarios y and 95% Rolling VaR')
+    plt.xlabel('Date')
+    plt.ylabel('Values (%)')
 
-# Add a legend
-plt.legend()
+    # Add a legend
+    plt.legend()
 
-# Show the plot
-#plt.tight_layout()
-#plt.show()
-st.pyplot(fig6)
+    # Show the plot
+    #plt.tight_layout()
+    #plt.show()
+    st.pyplot(fig6)
 
 #inciso e) ------------------------------------------------------------------------
 
