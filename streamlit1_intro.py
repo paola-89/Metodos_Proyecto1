@@ -65,11 +65,11 @@ st.subheader("VaR a 95%, 97.5% y 99%")
 
 tabla1= pd.DataFrame(
     {
-        "% Confianza": ["95%", "99%", "99%"],
-        "Paramétrico N": [CR.VaR_95, CR.VaR_99, CR.VaR_99],
-        "Paramétrico T": [CR.VaR_95_t,CR.VaR_99_t, CR.VaR_99_t],
-        "Histórico" : [CR.hVaR_95, CR.hVaR_99,CR.hVaR_99],
-        "Monte Carlo" : [CR.MCVaR_95, CR.MCVaR_99,CR.MCVaR_99],
+        "% Confianza": ["95%", "97.5%", "99%"],
+        "Paramétrico N": [CR.VaR_95, CR.VaR_975, CR.VaR_99],
+        "Paramétrico T": [CR.VaR_95_t,CR.VaR_975_t, CR.VaR_99_t],
+        "Histórico" : [CR.hVaR_95, CR.hVaR_975,CR.hVaR_99],
+        "Monte Carlo" : [CR.MCVaR_95, CR.MCVaR_975,CR.MCVaR_99],
     }
 )
 
@@ -80,10 +80,10 @@ st.subheader("ES a 95%, 97.5% y 99%")
 tabla2= pd.DataFrame(
     {
         "% Confianza": ["95%", "99%", "99%"],
-        "Paramétrico N": [CR.ES_95, CR.ES_99, CR.ES_99],
-        "Paramétrico T": [CR.ES_95_t,CR.ES_99_t, CR.ES_99_t],
-        "Histórico" : [CR.hES_95, CR.hES_99,CR.hES_99],
-        "Monte Carlo" : [CR.MCES_95, CR.MCES_99,CR.MCES_99],
+        "Paramétrico N": [CR.ES_95, CR.ES_975, CR.ES_99],
+        "Paramétrico T": [CR.ES_95_t,CR.ES_975_t, CR.ES_99_t],
+        "Histórico" : [CR.hES_95, CR.hES_975,CR.hES_99],
+        "Monte Carlo" : [CR.MCES_95, CR.MCES_975,CR.MCES_99],
     }
 )
 
