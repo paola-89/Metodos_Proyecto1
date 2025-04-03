@@ -407,16 +407,6 @@ tabla_violaciones = pd.DataFrame({
     'Porcentaje Violaciones (%)': [porcentaje_violaciones_95, porcentaje_violaciones_99]
 })
 
-#Le anexamos la evaluación que conlleva el criterio: Una buena estimación genera
-#un porcentaje de violaciones menores al 2.5 %
-tabla_violaciones['Evaluación Modelo'] = [
-    "Adecuado" if abs(violaciones_95 - 0.05*total_dias_validos) <= 2*np.sqrt(0.05*total_dias_validos) else "Revisar",
-    "Adecuado" if abs(violaciones_99 - 0.01*total_dias_validos) <= 2*np.sqrt(0.01*total_dias_validos) else "Revisar"
-]
-
-
-
-
 #Título:
 print("\n" + "="*42)
 print("Violaciones del VaR con volatilidad móvil")

@@ -47,8 +47,10 @@ def calcular_rendimientos_Log(df): #Función de rendimientos logarítmicos
 
     return rendimientos.dropna()
 
+
 def highlight_high_values(val):
-    """Si el valor es mayor a 2.5%, lo resalta en amarillo."""
-    color = "lightred" if val > 2.5 else "white"
+    """Resalta en rojo si el valor de la columna 'Porcentaje Violaciones (%)' es mayor a 2.5"""
+    color = "lightcoral" if val > 2.5 else "white"
     return f"background-color: {color}"
+
 
