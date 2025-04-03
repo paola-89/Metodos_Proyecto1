@@ -170,11 +170,12 @@ st.subheader("VaR histórico y paramétrico")
 
 #poner eleccion 
 intervalos = ["95%","97.5%","99%"]
-VAR_seleccionado = st.selectbox('Selecciona % de confianza ',intervalos)
+VAR_seleccionado = st.selectbox('Selecciona (%) de confianza ',intervalos)
 
 if VAR_seleccionado:
 
-    columna = f'{VAR_seleccionado} Rolling'
+    columna1 = f'{VAR_seleccionado} VaR Rolling'
+    columna2 = f'ES Rolling {VAR_seleccionado}'
 
     # Graficamos rendimientos
     fig6,ax = plt.subplots(figsize = (10,5))
@@ -184,9 +185,9 @@ if VAR_seleccionado:
     ax.set_ylabel("Rendimiento Diario")
 
 # Graficamos los Rolling VaR
-plt.plot(df_rendimientos.index,CR.VaR_95_rolling_df[columna], label=columna, color='red')
-plt.plot(df_rendimientos.index,CR.VaR_99_rolling_df[columna], label= columna, color='purple')
-#plt.plot(df_rendimientos.index, CR.ES_95_rolling_df['ES Rolling 95%'], label='ES Rolling 95%', color='purple')
+plt.plot(df_rendimientos.index,CR.VaR_95_rolling_df[columna1], label=columna1, color='red')
+#plt.plot(df_rendimientos.index,CR.VaR_99_rolling_df[columna], label= columna, color='purple')
+plt.plot(df_rendimientos.index, CR.ES_95_rolling_df[columna2], label=columna2, color='purple')
 #plt.plot(df_rendimientos.index, CR.hES_95_rolling_df['hES Rolling 95%'], label='hES Rolling 95%', color='black')
 
 
