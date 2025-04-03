@@ -310,7 +310,7 @@ tabla_resultados = []
 # Procesar las series de alfas
 for i, series in enumerate(alfas):
     for j, df in enumerate(series):
-        print('\n Medida de Riesgo: ', df.columns[1])
+        print('\n Medida de Riesgo: ', df.columns[0])
 
         # Cambiamos el índice de los rolling para poder concatenar después
         #df.index = pd.to_datetime(df['Fecha'])
