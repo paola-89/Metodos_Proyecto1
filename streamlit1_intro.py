@@ -163,22 +163,32 @@ plt.legend()
 
 st.pyplot(fig5)
 
-#d)) Rolling windows VaR------------------------------------------------------------------------------
+#d)) Rolling windows VaR----------------------------------------------------------------------------------------
 
 st.header("VaR y ES con Rolling Windows")
 st.subheader("VaR histórico y paramétrico")
 
 #poner eleccion 
+intervalos = ["95%","97.5%","99%"]
+VAR_seleccionado = st.selectbox('Selecciona % de confianza ',intervalos)
 
-# Graficamos rendimientos
-fig6,ax = plt.subplots(figsize = (10,5))
-ax.plot(df_rendimientos.index,df_rendimientos * 100, label='Rendimientos diarios (%)', color='blue', alpha=0.5)
-ax.axhline(y = 0,linestyle = '-',alpha = 0.7)
-ax.set_xlabel("Fecha")
-ax.set_ylabel("Rendimiento Diario")
+if VAR_seleccionado:
 
-# Plot the 95% Rolling VaR
-plt.plot(df_rendimientos.index,CR.VaR_95_rolling_df['95% VaR Rolling'], label='95% Rolling VaR', color='red')
+    columna = f'{VAR_seleccionado} Rolling'
+
+    # Graficamos rendimientos
+    fig6,ax = plt.subplots(figsize = (10,5))
+    ax.plot(df_rendimientos.index,df_rendimientos * 100, label='Rendimientos diarios (%)', color='blue', alpha=0.5)
+    ax.axhline(y = 0,linestyle = '-',alpha = 0.7)
+    ax.set_xlabel("Fecha")
+    ax.set_ylabel("Rendimiento Diario")
+
+# Graficamos los Rolling VaR
+plt.plot(df_rendimientos.index,CR.VaR_95_rolling_df[columna], label=columna, color='red')
+plt.plot(df_rendimientos.index,CR.VaR_99_rolling_df[columna], label= columna, color='purple')
+#plt.plot(df_rendimientos.index, CR.ES_95_rolling_df['ES Rolling 95%'], label='ES Rolling 95%', color='purple')
+#plt.plot(df_rendimientos.index, CR.hES_95_rolling_df['hES Rolling 95%'], label='hES Rolling 95%', color='black')
+
 
 # Add a title and axis labels
 plt.title('Rendimientos diarios y and 95% Rolling VaR')
@@ -199,5 +209,5 @@ st.subheader("Eficiencia de estimaciones")
 st.dataframe(CR.df_final.style.background_gradient(cmap='Reds',subset=['Proporción 95%','Proporción 99%']),hide_index = True)
 
 #inciso f) ------------------------------------------------------------------------------------------
-st.subheader("Eficiencia de aproxzimación")
+st.subheader("Eficiencia de aproximación")
 st.dataframe(CR.tabla_violaciones.style.applymap(MCF.highlight_high_values, subset=['Porcentaje Violaciones (%)']),hide_index = True)
