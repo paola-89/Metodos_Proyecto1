@@ -169,14 +169,14 @@ st.header("VaR y ES con Rolling Windows")
 st.subheader("VaR histórico y paramétrico")
 
 #poner eleccion 
-intervalos = ["95%","99%"]
+intervalos = ["95","99"]
 VAR_seleccionado = st.selectbox('Selecciona (%) de confianza ',intervalos)
 
 if VAR_seleccionado:
 
-    columna1 = f'{VAR_seleccionado} VaR Rolling'
-    columna2 = f'ES Rolling {VAR_seleccionado}'
-    dfc_name = f"{VAR_seleccionado}_rolling_df"  # "VaR_95_rolling_df"
+    columna1 = f'{VAR_seleccionado}% VaR Rolling'
+    columna2 = f'ES Rolling {VAR_seleccionado}%'
+    dfc_name = f"VaR_{VAR_seleccionado}_rolling_df"  # "VaR_95_rolling_df"
 
     # Obtener el DataFrame dinámicamente
     dfc = getattr(CR, dfc_name)
