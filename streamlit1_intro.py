@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt #Visualizacion de datos
 import yfinance as yf #Api de Yahoo Finanzas
 from scipy.stats import kurtosis, skew, shapiro ,norm,t #Funciones estadísticas
 from datetime import date
-import proyecto1_mercados as CR
+import proyecto1_metodos as CR
 
 st.header("Proyecto 1 MFVI")
 st.subheader("Integrantes del equipo:")
