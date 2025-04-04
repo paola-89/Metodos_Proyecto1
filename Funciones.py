@@ -57,4 +57,4 @@ def highlight_high_values(val):
 def generarMenu():
     with st.sidebar:
         st.page_link('proyecto1_mercados.py',label="Análisis")
-        st.page_link('pages/nombres.py',label="Equipo")
+        st.page_link('nombres.py',label="Equipo")
