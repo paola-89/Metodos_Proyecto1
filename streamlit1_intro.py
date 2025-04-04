@@ -10,10 +10,10 @@ import proyecto1_mercados as CR
 
 st.header("Proyecto 1 MFVI")
 st.subheader("Integrantes del equipo:")
-st.text('Castillo Saldivar Paola')
-st.text('Bernal Bobadilla Valeria')
-st.text('Reyes Hernández Manuel')
-st.text('Lagunas Medina Alan')
+st.markdown('- Castillo Saldivar Paola')
+st.markdown('- Bernal Bobadilla Valeria')
+st.markdown('- Reyes Hernández Manuel')
+st.markdown('- Lagunas Medina Alan')
 
 
 ticker = CR.ticker
