@@ -9,7 +9,8 @@ from datetime import date
 import proyecto1_mercados as CR
 
 ticker = CR.ticker
-st.title(f'Análisis del activo {ticker} desde 2010')
+nombre = CR.nombre
+st.title(f'Análisis del activo {nombre} desde 2010')
 
 st.header('Visualización de datos')
 
@@ -232,8 +233,8 @@ ax.set_xlabel("Fecha")
 ax.set_ylabel("Rendimiento Diario")
 
 #plot con 95% y 99% rolling VaR con volatilidad móvil
-plt.plot(df_rendimientos.index.index, CR.VaR_rolling_df['95% VaR Rolling'], label='VaR 95% móvil', color='red')
-plt.plot(df_rendimientos.index.index, CR.VaR_rolling_df['99% VaR Rolling'], label='VaR 99% móvil', color='purple')
+plt.plot(df_rendimientos.index, CR.VaR_rolling_df['95% VaR Rolling'], label='VaR 95% móvil', color='red')
+plt.plot(df_rendimientos.index, CR.VaR_rolling_df['99% VaR Rolling'], label='VaR 99% móvil', color='purple')
 
 #Títulos:
 plt.title(f'Rendimientos diarios y VaR Móvil de {nombre} (ventana 252 retornos)')
