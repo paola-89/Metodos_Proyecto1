@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt #Visualizacion de datos
 import yfinance as yf #Api de Yahoo Finanzas
 from scipy.stats import kurtosis, skew, shapiro ,norm,t #Funciones estadísticas
 from datetime import date
+import streamlit as st
 
 
 #Funciones a ultilizar
@@ -53,4 +54,7 @@ def highlight_high_values(val):
     color = "lightcoral" if val > 2.5 else "white"
     return f"background-color: {color}"
 
-
+def generarMenu():
+    with st.sidebar:
+        st.page_link('proyecto1_mercados.py',label="Análisis")
+        st.page_link('pages/nombres.py',label="Equipo")
