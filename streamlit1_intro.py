@@ -166,7 +166,6 @@ st.pyplot(fig5)
 #d)) Rolling windows VaR----------------------------------------------------------------------------------------
 
 st.header("VaR y ES con Rolling Windows")
-st.subheader("VaR histórico y paramétrico")
 
 #poner eleccion 
 intervalos = ["95","99"]
@@ -176,12 +175,18 @@ if VAR_seleccionado:
 
     columna1 = f'{VAR_seleccionado}% VaR Rolling'
     columna2 = f'ES Rolling {VAR_seleccionado}%'
+    columna3 = f'{VAR_seleccionado}% hVaR Rolling'
+    columna4 = f'hES Rolling {VAR_seleccionado}%'
     dfc_name = f"VaR_{VAR_seleccionado}_rolling_df"  # "VaR_95_rolling_df"
     dfc2_name = f"ES_{VAR_seleccionado}_rolling_df"
+    dfc3_name = f'hVaR_{VAR_seleccionado}_r_df'
+    dfc4_name = f'hES_{VAR_seleccionado}_rolling_df'
 
     # Obtener el DataFrame dinámicamente
     dfc = getattr(CR, dfc_name)
     dfc2 = getattr(CR, dfc2_name)
+    dfc3 = getattr(CR, dfc3_name)
+    dfc4 = getattr(CR, dfc4_name)
 
     # Graficamos rendimientos
     fig6,ax = plt.subplots(figsize = (10,5))
@@ -192,22 +197,20 @@ if VAR_seleccionado:
 
     # Graficamos los Rolling VaR
     plt.plot(df_rendimientos.index,dfc[columna1], label=columna1, color='red')
-    #plt.plot(df_rendimientos.index,CR.VaR_99_rolling_df[columna], label= columna, color='purple')
     plt.plot(df_rendimientos.index, dfc2[columna2], label=columna2, color='purple')
-    #plt.plot(df_rendimientos.index, CR.hES_95_rolling_df['hES Rolling 95%'], label='hES Rolling 95%', color='black')
+    plt.plot(df_rendimientos.index, dfc3[columna3], label=columna3, color='black')
+    plt.plot(df_rendimientos.index, dfc4[columna4], label=columna4, color='green')
+
 
 
     # Add a title and axis labels
-    plt.title('Rendimientos diarios y and 95% Rolling VaR')
+    plt.title('Rendimientos diarios con Rolling VaR y ES')
     plt.xlabel('Date')
     plt.ylabel('Values (%)')
 
     # Add a legend
     plt.legend()
-
-    # Show the plot
-    #plt.tight_layout()
-    #plt.show()
+ 
     st.pyplot(fig6)
 
 #inciso e) ------------------------------------------------------------------------
