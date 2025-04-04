@@ -181,7 +181,7 @@ if VAR_seleccionado:
 
     # Obtener el DataFrame dinámicamente
     dfc = getattr(CR, dfc_name)
-    df2 = getattr(CR, dfc2_name)
+    dfc2 = getattr(CR, dfc2_name)
 
     # Graficamos rendimientos
     fig6,ax = plt.subplots(figsize = (10,5))
