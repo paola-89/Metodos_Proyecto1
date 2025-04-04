@@ -12,7 +12,7 @@ st.header("Proyecto 1 MFVI")
 st.subheader("Integrantes del equipo:")
 st.markdown('- Castillo Saldivar Paola')
 st.markdown('- Bernal Bobadilla Valeria')
-st.markdown('- Reyes Hernández Manuel')
+st.markdown('- Reyes Hernández Emmanuel')
 st.markdown('- Lagunas Medina Alan')
 
 
