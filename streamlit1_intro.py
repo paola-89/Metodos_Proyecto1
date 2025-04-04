@@ -74,7 +74,7 @@ tabla1= pd.DataFrame(
     }
 )
 
-st.dataframe(tabla1.style.background_gradient(cmap='OrRd'),hide_index = True)
+st.dataframe(tabla1.style.background_gradient(cmap='afmhot'),hide_index = True)
 
 st.subheader("ES a 95%, 97.5% y 99%")
 
@@ -220,7 +220,7 @@ st.dataframe(CR.df_final.style.background_gradient(cmap='Reds',subset=['Proporci
 #inciso f) ------------------------------------------------------------------------------------------
 st.subheader("Eficiencia de aproximación")
 st.text("Acontinución se hará una aproximación usando la siguiente fórmula:")
-st.latex('VaR_{1-\ alpha} = q_{\ alpha} * \sigma_t^{252}')
+st.latex('VaR_{1-\(alpha)} = q_{\alpha} * \sigma_t^{252}')
 st.write("Primero visualicemos el VaR")
 
 plt.figure(figsize=(14, 7))
