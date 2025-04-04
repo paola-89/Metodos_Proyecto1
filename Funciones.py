@@ -53,8 +53,3 @@ def highlight_high_values(val):
     """Resalta en rojo si el valor de la columna 'Porcentaje Violaciones (%)' es mayor a 2.5"""
     color = "lightcoral" if val > 2.5 else "white"
     return f"background-color: {color}"
-
-def generarMenu():
-    with st.sidebar:
-        st.page_link('proyecto1_mercados.py',label="Análisis")
-        st.page_link('nombres.py',label="Equipo")

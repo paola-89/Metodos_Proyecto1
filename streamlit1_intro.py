@@ -8,9 +8,13 @@ from scipy.stats import kurtosis, skew, shapiro ,norm,t #Funciones estadísticas
 from datetime import date
 import proyecto1_mercados as CR
 
-import Funciones as fc
+st.header("Proyecto 1 MFVI")
+st.subheader("Integrantes del equipo:")
+st.text('Castillo Saldivar Paola')
+st.text('Bernal Bobadilla Valeria')
+st.text('Reyes Hernández Manuel')
+st.text('Lagunas Medina Alan')
 
-fc.generarMenu()
 
 ticker = CR.ticker
 nombre = CR.nombre
