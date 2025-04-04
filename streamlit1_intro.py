@@ -177,9 +177,11 @@ if VAR_seleccionado:
     columna1 = f'{VAR_seleccionado}% VaR Rolling'
     columna2 = f'ES Rolling {VAR_seleccionado}%'
     dfc_name = f"VaR_{VAR_seleccionado}_rolling_df"  # "VaR_95_rolling_df"
+    dfc2_name = f"ES_{VAR_seleccionado}_rolling_df"
 
     # Obtener el DataFrame dinámicamente
     dfc = getattr(CR, dfc_name)
+    df2 = getattr(CR, dfc2_name)
 
     # Graficamos rendimientos
     fig6,ax = plt.subplots(figsize = (10,5))
@@ -191,7 +193,7 @@ if VAR_seleccionado:
     # Graficamos los Rolling VaR
     plt.plot(df_rendimientos.index,dfc[columna1], label=columna1, color='red')
     #plt.plot(df_rendimientos.index,CR.VaR_99_rolling_df[columna], label= columna, color='purple')
-    plt.plot(df_rendimientos.index, dfc[columna2], label=columna2, color='purple')
+    plt.plot(df_rendimientos.index, dfc2[columna2], label=columna2, color='purple')
     #plt.plot(df_rendimientos.index, CR.hES_95_rolling_df['hES Rolling 95%'], label='hES Rolling 95%', color='black')
 
 
