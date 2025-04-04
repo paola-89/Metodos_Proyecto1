@@ -19,7 +19,7 @@ with st.spinner('Descargando data...'):
     df_precios = MCF.obtener_datos(ticker)
     df_rendimientos = MCF.calcular_rendimientos_Log(df_precios)
 
-#Datos inciso b)
+#Datos inciso b)---------------------------------------------------------------------------------------------------
 
 st.subheader(f"Gráfico de precio: {ticker}")
 
@@ -74,7 +74,7 @@ tabla1= pd.DataFrame(
     }
 )
 
-st.dataframe(tabla1,hide_index = True)
+st.dataframe(tabla1.style.background_gradient(cmap='OrRd'),hide_index = True)
 
 st.subheader("ES a 95%, 97.5% y 99%")
 
@@ -88,7 +88,7 @@ tabla2= pd.DataFrame(
     }
 )
 
-st.dataframe(tabla2,hide_index = True)
+st.dataframe(tabla2.style.background_gradient(cmap='OrRd'),hide_index = True)
 
 #Histograma donde se muestra VaR y ES-----------------------------------------------------------------
 st.subheader("Histogramas de las Medidas de Riesgo")
@@ -219,9 +219,9 @@ st.dataframe(CR.df_final.style.background_gradient(cmap='Reds',subset=['Proporci
 
 #inciso f) ------------------------------------------------------------------------------------------
 st.subheader("Eficiencia de aproximación")
-st.text("Primero visualicemos el VaR")
-
-
+st.text("Acontinución se hará una aproximación usando la siguiente fórmula:")
+st.latex('VaR_{1-\ alpha} = q_{\ alpha} * \sigma_t^{252}')
+st.write("Primero visualicemos el VaR")
 
 plt.figure(figsize=(14, 7))
 
@@ -243,13 +243,10 @@ plt.ylabel('Rendimiento/VaR (%)')
 
 
 plt.legend()
-plt.tight_layout()
-
-plt.legend()
  
 st.pyplot(fig7)
 
-
+st.write("Con lo anterior obtenemos:")
 
 st.dataframe(CR.tabla_violaciones.style.applymap(MCF.highlight_high_values, subset=['Porcentaje Violaciones (%)']),hide_index = True)
 st.text("Nota: Una buena estimación genera un porcentaje de violaciones menores al 2.5 %")
