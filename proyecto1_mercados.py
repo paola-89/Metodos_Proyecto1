@@ -13,7 +13,7 @@ import Funciones as MCF
 
 #Código
 #inciso a) Descarga de información de un activo
-ticker = "NVDA"
+ticker = "AAPL"
 df_precios = MCF.obtener_datos(ticker)
 df_precios.iloc[:,0]
 empresa = yf.Ticker(ticker)
@@ -292,8 +292,6 @@ plt.tight_layout()
 plt.show()
 
 #e) Eficiencia de estimaciones-----------------------------------------------------------------------------
-
-
 
 # Desplazar los rendimientos del stock al día siguiente (t+1)
 rendimientos_back = df_rendimientos_log.shift(-1)*100

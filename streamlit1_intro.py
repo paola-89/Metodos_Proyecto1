@@ -198,10 +198,8 @@ if VAR_seleccionado:
     # Graficamos los Rolling VaR
     plt.plot(df_rendimientos.index,dfc[columna1], label=columna1, color='red')
     plt.plot(df_rendimientos.index, dfc2[columna2], label=columna2, color='purple')
-    plt.plot(df_rendimientos.index, dfc3[columna3], label=columna3, color='black')
-    plt.plot(df_rendimientos.index, dfc4[columna4], label=columna4, color='green')
-
-
+    plt.plot(df_rendimientos.index, dfc3[columna3], label=columna3, color='green')
+    plt.plot(df_rendimientos.index, dfc4[columna4], label=columna4, color='black')
 
     # Add a title and axis labels
     plt.title('Rendimientos diarios con Rolling VaR y ES')
@@ -220,4 +218,37 @@ st.dataframe(CR.df_final.style.background_gradient(cmap='Reds',subset=['Proporci
 
 #inciso f) ------------------------------------------------------------------------------------------
 st.subheader("Eficiencia de aproximación")
+st.text("Primero visualicemos el VaR")
+
+
+
+plt.figure(figsize=(14, 7))
+
+#plot con retornos diarios:
+fig7,ax = plt.subplots(figsize = (10,5))
+ax.plot(df_rendimientos.index,df_rendimientos * 100, label='Rendimientos diarios (%)', color='blue', alpha=0.5)
+ax.axhline(y = 0,linestyle = '-',alpha = 0.7)
+ax.set_xlabel("Fecha")
+ax.set_ylabel("Rendimiento Diario")
+
+#plot con 95% y 99% rolling VaR con volatilidad móvil
+plt.plot(df_rendimientos.index.index, CR.VaR_rolling_df['95% VaR Rolling'], label='VaR 95% móvil', color='red')
+plt.plot(df_rendimientos.index.index, CR.VaR_rolling_df['99% VaR Rolling'], label='VaR 99% móvil', color='purple')
+
+#Títulos:
+plt.title(f'Rendimientos diarios y VaR Móvil de {nombre} (ventana 252 retornos)')
+plt.xlabel('Fecha')
+plt.ylabel('Rendimiento/VaR (%)')
+
+
+plt.legend()
+plt.tight_layout()
+
+plt.legend()
+ 
+st.pyplot(fig7)
+
+
+
 st.dataframe(CR.tabla_violaciones.style.applymap(MCF.highlight_high_values, subset=['Porcentaje Violaciones (%)']),hide_index = True)
+st.text("Nota: Una buena estimación genera un porcentaje de violaciones menores al 2.5 %")
